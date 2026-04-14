@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Personas Mobilità — Inditex Italia</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+:root {
+  --navy: #1B2A3D; --teal: #2A9D8F; --teal-dark: #1F7A6F;
+  --sand: #F7F4EF; --warm-white: #FDFCFA; --charcoal: #2C3E50; --slate: #5A6B7A;
+  --card: #FFFFFF; --border: #E2DDD5;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: rgba(42,157,143,.2); }
+body { font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--sand); color: var(--charcoal); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+
+.fade-in { animation: fadeIn .5s ease-out; }
+.slide-up { animation: slideUp .6s ease-out; }
+
+.topbar { background:var(--navy); padding:12px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; }
+.topbar-brand { display:flex; align-items:center; gap:8px; }
+.topbar-dot { width:8px; height:8px; border-radius:50%; background:var(--teal); }
+.topbar-title { color:#fff; font-size:14px; font-weight:600; letter-spacing:-.3px; }
+.topbar-sub { color:var(--slate); font-size:11px; margin-left:4px; }
+.btn-sm { background:transparent; border:1px solid var(--slate); color:var(--slate); font-size:11px; padding:4px 12px; border-radius:6px; cursor:pointer; font-family:inherit; }
+
+.container { max-width:620px; margin:0 auto; padding:30px 20px 40px; }
+
+.welcome-icon { width:56px; height:56px; border-radius:50%; background:rgba(42,157,143,.1); display:flex; align-items:center; justify-content:center; margin:20px auto 20px; font-size:26px; }
+h1.welcome-title { font-size:26px; font-weight:700; color:var(--navy); line-height:1.3; margin-bottom:8px; text-align:center; }
+.welcome-desc { font-size:14px; color:var(--slate); line-height:1.6; max-width:440px; margin:0 auto 32px; text-align:center; }
+.role-label { font-size:13px; color:var(--navy); font-weight:600; margin-bottom:16px; text-align:center; }
+.role-cards { display:flex; gap:12px; justify-content:center; }
+.role-card { flex:1; max-width:220px; padding:20px 16px; background:var(--card); border:1.5px solid var(--border); border-radius:12px; cursor:pointer; transition:all .2s; text-align:center; }
+.role-card:hover { border-color:var(--teal); transform:translateY(-2px); box-shadow:0 8px 24px rgba(42,157,143,.1); }
+.role-card-emoji { font-size:32px; margin-bottom:8px; }
+.role-card-label { font-size:15px; font-weight:700; color:var(--navy); }
+.role-card-sub { font-size:11px; color:var(--slate); margin-top:4px; }
+
+.badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-manager { background:#E8F0FE; color:#1A56DB; }
+.badge-venditore { background:#FEF3E8; color:#B45309; }
+h2.section-title { font-size:20px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.section-desc { font-size:13px; color:var(--slate); margin-bottom:24px; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.form-label { font-size:12px; font-weight:600; color:var(--charcoal); margin-bottom:4px; display:block; }
+.form-input, .form-select { width:100%; padding:10px 14px; font-size:16px; border:1.5px solid var(--border); border-radius:8px; background:var(--warm-white); color:var(--charcoal); font-family:inherit; outline:none; -webkit-appearance:none; }
+.form-input:focus, .form-select:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(42,157,143,.12); }
+.form-select { cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235A6B7A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; padding-right:36px; }
+
+.btn-primary { width:100%; padding:14px; background:var(--teal); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; -webkit-appearance:none; }
+.btn-primary:disabled { background:var(--border); cursor:not-allowed; }
+.btn-nav { padding:10px 20px; border-radius:8px; font-size:13px; cursor:pointer; font-family:inherit; -webkit-appearance:none; }
+.btn-back { background:transparent; border:1px solid var(--border); color:var(--charcoal); }
+.btn-back:disabled { color:var(--border); cursor:not-allowed; }
+.btn-next { background:var(--navy); border:none; color:#fff; font-weight:600; }
+.btn-next:disabled { background:var(--border); cursor:not-allowed; }
+.btn-submit { background:var(--teal); border:none; color:#fff; font-weight:700; padding:10px 24px; animation:pulse 2s infinite; }
+.btn-submit:disabled { animation:none; background:var(--border); cursor:not-allowed; }
+
+.progress-wrap { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.progress-text { font-size:12px; color:var(--slate); font-weight:500; }
+.progress-pct { font-size:12px; color:var(--teal); font-weight:700; }
+.progress-bar { width:100%; height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg, var(--teal), var(--teal-dark)); border-radius:2px; transition:width .4s cubic-bezier(.4,0,.2,1); }
+
+.q-card { background:var(--card); border-radius:14px; padding:24px 20px; margin-top:16px; border:1px solid var(--border); box-shadow:0 2px 12px rgba(0,0,0,.04); }
+.q-meta { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.q-badge { background:var(--teal); color:#fff; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:.5px; }
+.q-id { font-size:12px; color:var(--slate); }
+.q-text { font-size:17px; line-height:1.55; color:var(--charcoal); font-family:'Source Serif 4', Georgia, serif; margin:12px 0 20px; font-style:italic; }
+.q-options { display:flex; flex-direction:column; gap:10px; }
+.q-option { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:var(--warm-white); border:1.5px solid var(--border); border-radius:10px; cursor:pointer; text-align:left; transition:all .15s; -webkit-tap-highlight-color:transparent; }
+.q-option.selected { background:rgba(42,157,143,.06); border-color:var(--teal); box-shadow:0 0 0 3px rgba(42,157,143,.12); }
+.q-letter { width:28px; height:28px; min-width:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; font-family:'DM Mono', monospace; border:2px solid var(--border); color:var(--slate); }
+.q-option.selected .q-letter { background:var(--teal); border-color:var(--teal); color:#fff; }
+.q-option-text { font-size:14px; line-height:1.5; color:var(--charcoal); padding-top:3px; }
+.nav-row { display:flex; justify-content:space-between; margin-top:16px; gap:10px; }
+
+.result-icon { width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px; margin:10px auto 16px; }
+.result-label { font-size:12px; color:var(--slate); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+.result-name { font-size:28px; font-weight:800; margin-bottom:6px; }
+.result-tagline { font-size:15px; color:var(--navy); font-style:italic; font-family:'Source Serif 4', Georgia, serif; margin-bottom:20px; line-height:1.5; }
+.result-desc { background:var(--card); border-radius:14px; padding:20px; text-align:left; border:1px solid var(--border); margin-bottom:16px; font-size:14px; line-height:1.7; color:var(--charcoal); }
+.result-stats { display:flex; gap:10px; justify-content:center; margin-bottom:20px; }
+.result-stat { background:var(--card); border-radius:10px; padding:12px 20px; border:1px solid var(--border); text-align:center; }
+.result-stat-val { font-size:24px; font-weight:800; }
+.result-stat-label { font-size:10px; color:var(--slate); }
+.btn-reset { padding:12px 28px; background:var(--navy); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; -webkit-appearance:none; }
+.result-note { font-size:11px; color:var(--slate); margin-top:16px; }
+.footer { text-align:center; padding:20px 16px 12px; font-size:10px; color:var(--slate); }
+
+@media (max-width:500px) {
+  .role-cards { flex-direction:column; align-items:center; }
+  .role-card { max-width:100%; }
+  .form-grid { grid-template-columns:1fr; }
+  h1.welcome-title { font-size:22px; }
+  .q-text { font-size:15px; }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// All emoji as plain strings (safe for all Safari versions)
+var PERSONAS = {
+  "Esploratore":          { emoji:"\uD83C\uDF0D", color:"#2A9D8F", tagline:"Sei pronto a metterti in gioco ovunque l\u2019azienda ti porti.", desc:"Hai una forte predisposizione alla mobilit\u00e0: sei aperto a cambiare negozio, citt\u00e0 e ruolo. Per te la crescita professionale passa anche attraverso il confronto con contesti nuovi. La tua energia \u00e8 preziosa per l\u2019organizzazione e il tuo profilo ti rende un candidato naturale per progetti speciali, aperture e percorsi di sviluppo accelerato." },
+  "Ambizioso Locale":     { emoji:"\uD83D\uDE80", color:"#3D8B7A", tagline:"Vuoi crescere, ma il tuo territorio resta il tuo punto fermo.", desc:"Hai ambizione e voglia di fare di pi\u00f9, ma preferisci farlo senza allontanarti troppo da dove vivi. Il tuo profilo si presta a rotazioni tra negozi della stessa area, percorsi di crescita manageriale nel territorio e progetti trasversali che non richiedono un trasferimento definitivo." },
+  "Pragmatico":           { emoji:"\u2696\uFE0F", color:"#5BA3C9", tagline:"Ti muovi se le condizioni sono giuste. Valuti tutto con lucidit\u00e0.", desc:"Non ti entusiasmi al primo annuncio, ma nemmeno chiudi la porta a priori. Valuti costi e benefici con razionalit\u00e0. Se l\u2019azienda ti propone un\u2019opportunit\u00e0 concreta con un pacchetto di supporto adeguato, sei pronto a muoverti. Sei particolarmente sensibile alla qualit\u00e0 delle proposte." },
+  "Curioso Cauto":        { emoji:"\uD83D\uDD0D", color:"#E9A84C", tagline:"Dici no al cambiamento permanente, ma s\u00ec alla sperimentazione.", desc:"Preferisci la sicurezza del conosciuto, ma non per mancanza di curiosit\u00e0. Sei aperto a esperienze temporanee, affiancamenti e missioni brevi. L\u2019azienda pu\u00f2 offrirti percorsi a basso rischio \u2014 task force, supporti stagionali, progetti cross-store \u2014 che ti permettano di allargare i tuoi orizzonti." },
+  "Mobile Condizionato":  { emoji:"\uD83D\uDD04", color:"#8E6BBF", tagline:"La tua disponibilit\u00e0 c\u2019\u00e8, ma ha bisogno di chiarezza e fiducia.", desc:"Stai nel mezzo: non sei chiuso alla mobilit\u00e0 ma nemmeno completamente convinto. Probabilmente ti mancano informazioni o non hai ancora trovato l\u2019opportunit\u00e0 giusta. Con pi\u00f9 comunicazione, trasparenza e supporto manageriale, la tua predisposizione potrebbe crescere significativamente." },
+  "Radicato":             { emoji:"\uD83C\uDFE0", color:"#C0392B", tagline:"Il tuo punto di forza \u00e8 la stabilit\u00e0 e la continuit\u00e0 che garantisci al team.", desc:"La mobilit\u00e0 geografica non fa per te in questo momento, e va benissimo cos\u00ec. La conoscenza del contesto locale, la relazione con i clienti e la memoria storica del team sono risorse che non si improvvisano. Il tuo percorso di crescita pu\u00f2 svilupparsi attraverso specializzazione, formazione e mentoring." }
+};
+
+var VENDITORE_QS = [
+  { id:"V1", label:"Scenario", q:"Il tuo manager ti informa che esiste un\u2019opportunit\u00e0 di crescita in un altro negozio Inditex. Come reagisci?", a:["Sono subito curioso \u2014 voglio saperne di pi\u00f9","Dipende molto dal negozio, dal ruolo e dalle condizioni","In genere preferisco restare nel mio negozio attuale"]},
+  { id:"V2", label:"Domanda diretta", q:"Se quell\u2019opportunit\u00e0 richiedesse di trasferirti in un\u2019altra citt\u00e0, cosa faresti?", a:["Nessun problema \u2014 mi trasferirei","Lo valuter\u00f2 solo con supporto concreto dell\u2019azienda (alloggio, rimborso, rientro garantito\u2026)","Non \u00e8 una possibilit\u00e0 per me, ho radici qui"]},
+  { id:"V3", label:"Domanda diretta", q:"Nei prossimi 3 anni, qual \u00e8 la tua principale aspirazione?", a:["Diventare visual, operation o responsabile di negozio, anche altrove","Migliorare le mie competenze nel ruolo che gi\u00e0 svolgo","Mantenere l\u2019equilibrio e la stabilit\u00e0 che ho costruito finora"]},
+  { id:"V4", label:"Scenario", q:"Ti propongono un cambio di negozio un po\u2019 distante con stessa retribuzione ma con prospettive di crescita nei 12 mesi successivi. Come la vedi?", a:["Le prospettive mi bastano \u2014 \u00e8 un investimento sul mio futuro","Ci penserei, ma ho bisogno di un riconoscimento economico immediato","Preferisco non cambiare quello che funziona"]},
+  { id:"V5", label:"Scenario", q:"Ti propongono un progetto formativo di 2 mesi in un negozio di un altro brand, senza impatto permanente sul tuo ruolo attuale. Cosa fai?", a:["Ottimo \u2014 \u00e8 esattamente il tipo di esperienza che cerco","Lo farei se \u00e8 logisticamente gestibile senza troppi sacrifici","Preferisco non interrompere la mia routine"]},
+  { id:"V6", label:"Situazione concreta", q:"Lavori a Napoli. Ti offrono un ruolo di responsabilit\u00e0 temporanea in un negozio a Milano per 18 mesi, con rientro garantito e copertura spese di alloggio. Cosa fai?", a:["Accetto \u2014 \u00e8 un\u2019opportunit\u00e0 che non voglio perdere","Valuto attentamente i dettagli del supporto prima di decidere","Non posso \u2014 ho impegni e legami che non mi permettono di spostarmi"]},
+  { id:"V7", label:"Domanda diretta", q:"Con quale frequenza cerchi o consulti le opportunit\u00e0 interne Inditex in InTalent?", a:["Regolarmente \u2014 fa parte del mio piano di sviluppo","A volte, quando capita o sono incuriosito","Raramente \u2014 non \u00e8 qualcosa a cui penso attivamente"]},
+  { id:"V8", label:"Scenario", q:"Il tuo negozio chiude per ristrutturazione e ti propongono di lavorare 6 mesi in un altro punto vendita della stessa citt\u00e0. Come la vivi?", a:["Benissimo \u2014 \u00e8 un\u2019occasione per conoscere un nuovo team e un nuovo contesto","Va bene, ma spero di tornare nel mio negozio appena possibile","Mi pesa molto \u2014 quel negozio \u00e8 il mio posto"]},
+  { id:"V9", label:"Scenario", q:"Nel tuo negozio introducono un nuovo modo di lavorare (layout, processo di vendita, sistema informatico) che cambia molto la tua routine. Come reagisci?", a:["Mi piace \u2014 i cambiamenti portano energia e mi stimolano a imparare","Mi adatto, ma ho bisogno di tempo e di formazione adeguata","Preferivo com\u2019era prima \u2014 i cambiamenti mi creano disagio"]},
+  { id:"V10", label:"Scenario", q:"Ti offrono un ruolo nuovo, interessante ma ancora poco definito nei dettagli. Accetti?", a:["S\u00ec \u2014 le migliori opportunit\u00e0 nascono cos\u00ec, i dettagli si costruiscono strada facendo","Chiedo prima pi\u00f9 informazioni, poi decido","Preferisco proposte chiare e strutturate, altrimenti non mi sento sicuro/a"]},
+  { id:"V11", label:"Situazione concreta", q:"Il tuo team attuale \u00e8 molto affiatato. Ti propongono un avanzamento di ruolo in un negozio dove non conosci nessuno. Cosa pesa di pi\u00f9?", a:["L\u2019avanzamento \u2014 i rapporti si costruiscono anche altrove","\u00c8 una decisione difficile, ma l\u2019avanzamento probabilmente prevale","Il team per me \u00e8 fondamentale \u2014 non lo lascerei facilmente"]},
+  { id:"V12", label:"Domanda diretta", q:"Cosa ti motiva di pi\u00f9 nel lavoro quotidiano?", a:["Sentire che sto crescendo professionalmente e imparando cose nuove","Fare bene il mio lavoro e ricevere riconoscimento dai miei responsabili","La routine, la sicurezza e il rapporto con i colleghi che conosco"]},
+  { id:"V13", label:"Scenario", q:"Ti propongono un percorso di crescita accelerato, ma richiede 3 mesi di orario intenso e tutti i weekend lavorativi. Come reagisci?", a:["Ci sto \u2014 \u00e8 un investimento limitato nel tempo con un ritorno importante","Valuto il rapporto tra lo sforzo e il risultato concreto che ottengo","L\u2019equilibrio vita-lavoro per me non \u00e8 negoziabile"]},
+  { id:"V14", label:"Domanda diretta", q:"Come ti immagini tra 5 anni?", a:["In un ruolo diverso da quello attuale, possibilmente con maggiori responsabilit\u00e0","Nello stesso ambito, ma con pi\u00f9 competenze e magari una posizione leggermente diversa","Pi\u00f9 o meno dove sono ora, con maggiore stabilit\u00e0 e serenit\u00e0"]}
+];
+
+var MANAGER_QS = [
+  { id:"M1", label:"Domanda diretta", q:"Se ti proponessero un ruolo di responsabilit\u00e0 maggiore in un brand diverso dal tuo, quale sarebbe la tua prima reazione?", a:["Interesse immediato \u2014 la diversit\u00e0 di brand \u00e8 un arricchimento","Lo valuterei con attenzione, dipende dalla proposta concreta","Preferisco rimanere nel brand che conosco bene"]},
+  { id:"M2", label:"Scenario", q:"Ti offrono un ruolo corporate (HR, Formazione, Prodotto, Operations) in sede centrale. Il tuo negozio rimarrebbe senza di te per un anno. Come reagisci?", a:["\u00c8 esattamente il tipo di evoluzione che voglio esplorare","Lo farei solo se le condizioni economiche lo giustificano chiaramente","Il mio valore \u00e8 nel negozio \u2014 preferisco restare qui"]},
+  { id:"M3", label:"Domanda diretta", q:"Nei prossimi 3 anni, qual \u00e8 il percorso che ti rappresenta di pi\u00f9?", a:["Area Manager con trasferimento","Crescita nel mio negozio o nella mia area con un possibile ruolo multi-negozio, senza spostarmi","Mantenere il ruolo attuale con buon equilibrio vita-lavoro"]},
+  { id:"M4", label:"Situazione concreta", q:"Sei Store Manager a Bari. Ti propongono di coordinare l\u2019apertura di un nuovo negozio Flagship a Torino per 12 mesi, con supporto logistico e incremento retributivo. Cosa fai?", a:["Accetto \u2014 \u00e8 un\u2019opportunit\u00e0 di crescita cross-brand che vale lo sforzo","Valuto i dettagli del pacchetto \u2014 dipende dalle condizioni concrete","Preferisco non lasciare il mio negozio e il mio team"]},
+  { id:"M5", label:"Scenario", q:"Ti propongono di guidare un progetto strategico di 3 mesi insieme a manager di altri brand, senza cambiare il tuo ruolo in modo permanente. Come la vedi?", a:["Ottimo \u2014 \u00e8 esattamente il tipo di esperienza che mi arricchisce","Lo farei se non compromette la gestione del mio negozio","Preferisco non frammentare la mia attenzione"]},
+  { id:"M6", label:"Domanda diretta", q:"Quanto sei disposto a lavorare in un contesto internazionale (sede estera, progetto europeo, team multi-paese)?", a:["\u00c8 qualcosa che cerco attivamente \u2014 il contesto internazionale mi stimola","Lo farei se ci sono condizioni chiare e un piano di rientro strutturato","Non \u00e8 una priorit\u00e0 \u2014 preferisco consolidare il mio ruolo qui in Italia"]},
+  { id:"M7", label:"Scenario", q:"Il tuo HR di zona ti propone un percorso di sviluppo formale (formazione tecnica, coaching, programma leadership) che richiede un impegno extra lavorativo. Come ti senti?", a:["\u00c8 una conferma che l\u2019azienda crede in me \u2014 accetto con entusiasmo","Dipende dal tempo richiesto e dall\u2019impatto sul mio operativo quotidiano","Preferisco imparare sul campo \u2014 i programmi formali non mi convincono molto"]},
+  { id:"M8", label:"Domanda diretta", q:"Con quale frequenza esplori attivamente opportunit\u00e0 interne Inditex al di fuori del tuo brand o della tua funzione attuale?", a:["Regolarmente \u2014 tengo d\u2019occhio i movimenti nell\u2019organizzazione e InTalent","Solo quando ricevo segnali o proposte dall\u2019HR","Raramente \u2014 sono concentrato sul mio negozio"]},
+  { id:"M9", label:"Scenario", q:"Il tuo Area Manager ti chiede di prendere temporaneamente la gestione di un secondo negozio in difficolt\u00e0, in aggiunta al tuo. Come reagisci?", a:["\u00c8 una sfida che mi stimola \u2014 dimostra fiducia nelle mie capacit\u00e0","Lo faccio se c\u2019\u00e8 un piano chiaro di durata e supporto operativo","Preferisco concentrarmi al 100% sul mio negozio"]},
+  { id:"M10", label:"Domanda diretta", q:"Se domani ti proponessero un ruolo equivalente ma in un negozio abbastanza vicino e pi\u00f9 importante in un altro brand di Inditex che non hai mai gestito, come ti sentiresti?", a:["Entusiasta \u2014 \u00e8 un\u2019opportunit\u00e0 per ampliare la mia visione","Incuriosito ma cauto \u2014 dovrei capire il contesto prima di decidere","Fuori dalla mia comfort zone \u2014 preferisco il brand che padroneggio"]},
+  { id:"M11", label:"Scenario", q:"Ti propongono di guidare un progetto pilota mai tentato prima in Italia. Cosa pensi?", a:["Perfetto \u2014 i progetti innovativi sono quelli che fanno la differenza nel percorso","Lo valuto, ma voglio capire quanto l\u2019azienda \u00e8 disposta a sostenermi in caso di insuccesso","Preferisco progetti con risultati prevedibili e un framework gi\u00e0 consolidato"]},
+  { id:"M12", label:"Domanda diretta", q:"Puoi scegliere tra due percorsi formativi aziendali: uno ti specializza nella gestione avanzata del tuo format attuale, l\u2019altro ti prepara a gestire format diversi in contesti che non conosci. Quale scegli?", a:["Il secondo \u2014 voglio ampliare il mio raggio d\u2019azione","Dipende da quale dei due ha pi\u00f9 impatto sulla mia prossima promozione","Il primo \u2014 preferisco diventare eccellente in quello che gi\u00e0 faccio"]},
+  { id:"M13", label:"Domanda diretta", q:"Cosa ti rende pi\u00f9 orgoglioso/a come manager?", a:["Aver sviluppato persone che ora ricoprono ruoli di responsabilit\u00e0","I risultati commerciali e operativi del mio negozio","La stabilit\u00e0 e il clima positivo che ho creato nel mio team"]},
+  { id:"M14", label:"Scenario", q:"Ti propongono due opzioni: A) diventare Area Manager con trasferimento, oppure B) un ruolo di Training Manager per pi\u00f9 negozi vicini. Quale scegli?", a:["Area Manager \u2014 \u00e8 il percorso di crescita verticale che cerco","Training Manager \u2014 mi interessa l\u2019impatto trasversale sull\u2019organizzazione","Nessuno dei due \u2014 sono soddisfatto del mio ruolo attuale"]},
+  { id:"M15", label:"Domanda diretta", q:"Quanto saresti disposto/a a modificare le tue abitudini personali (pendolarismo, orari, distanza dalla famiglia) per un\u2019opportunit\u00e0 di carriera significativa?", a:["Molto \u2014 la carriera in questa fase \u00e8 la mia priorit\u00e0 e i sacrifici fanno parte del percorso","In misura ragionevole \u2014 dipende dalla durata e dal ritorno concreto","Poco \u2014 ho costruito un equilibrio che non intendo compromettere"]},
+  { id:"M16", label:"Scenario", q:"Se potessi proporre un cambiamento organizzativo a Inditex Italia, su cosa ti concentreresti?", a:["Pi\u00f9 percorsi di mobilit\u00e0 cross-brand e cross-funzione per i talenti","Migliori condizioni e incentivi per chi accetta di spostarsi","Pi\u00f9 investimento sulla formazione e sulla crescita dentro il proprio negozio"]}
+];
+
+var BRANDS = ["Zara","Zara Home","Bershka","Pull&Bear","Stradivarius","Oysho","Massimo Dutti","Lefties"];
+
+function classify(role, answers) {
+  var qs = role === "venditore" ? VENDITORE_QS : MANAGER_QS;
+  var vals = []; for (var i=0;i<answers.length;i++) vals.push(answers[i]===0?3:answers[i]===1?2:1);
+  var raw = 0; for (var i=0;i<vals.length;i++) raw += vals[i];
+  var norm = Math.round((raw - qs.length) / (qs.length * 2) * 100);
+  var a = answers;
+  var countA = 0, countC = 0;
+  for (var i=0;i<a.length;i++) { if(a[i]===0) countA++; if(a[i]===2) countC++; }
+  if (role === "venditore") {
+    if (a[0]===0&&a[1]===0&&a[5]===0&&a[10]===0&&norm>=65) return {persona:"Esploratore",score:norm};
+    if (norm>=75&&countA>=10) return {persona:"Esploratore",score:norm};
+    if (a[2]===0&&a[1]===2&&(a[13]===0||a[11]===0)&&norm>=40) return {persona:"Ambizioso Locale",score:norm};
+    if ((a[0]===0||a[0]===1)&&a[2]===0&&a[1]===2&&norm>=35) return {persona:"Ambizioso Locale",score:norm};
+    if (a[1]===1&&a[3]===1&&norm>=30&&norm<=72) return {persona:"Pragmatico",score:norm};
+    if (a[1]===1&&a[5]===1&&a[12]===1&&norm>=30&&norm<=72) return {persona:"Pragmatico",score:norm};
+    if (a[1]===2&&(a[4]===0||a[4]===1)&&(a[7]===0||a[7]===1)) return {persona:"Curioso Cauto",score:norm};
+    if (a[1]===2&&(a[8]===0||a[8]===1)&&(a[4]===0||a[4]===1)&&(a[0]===1||a[0]===2)) return {persona:"Curioso Cauto",score:norm};
+    if (norm<30) return {persona:"Radicato",score:norm};
+    if (a[1]===2&&a[4]===2&&a[0]===2&&a[8]===2) return {persona:"Radicato",score:norm};
+    if (countC>=10) return {persona:"Radicato",score:norm};
+    return {persona:"Mobile Condizionato",score:norm};
+  } else {
+    if (a[0]===0&&a[3]===0&&a[5]===0&&a[13]===0&&norm>=65) return {persona:"Esploratore",score:norm};
+    if (norm>=75&&countA>=12) return {persona:"Esploratore",score:norm};
+    if (a[2]===1&&a[3]===2&&(a[13]===1||a[11]===0)&&norm>=35) return {persona:"Ambizioso Locale",score:norm};
+    if ((a[0]===0||a[0]===1)&&a[2]===1&&a[3]===2&&norm>=35) return {persona:"Ambizioso Locale",score:norm};
+    if (a[1]===1&&a[3]===1&&norm>=30&&norm<=72) return {persona:"Pragmatico",score:norm};
+    if (a[3]===1&&a[14]===1&&a[8]===1&&norm>=30&&norm<=72) return {persona:"Pragmatico",score:norm};
+    if (a[3]===2&&(a[4]===0||a[4]===1)&&(a[8]===0||a[8]===1)) return {persona:"Curioso Cauto",score:norm};
+    if (a[3]===2&&(a[10]===0||a[10]===1)&&(a[4]===0||a[4]===1)&&(a[0]===1||a[0]===2)) return {persona:"Curioso Cauto",score:norm};
+    if (norm<30) return {persona:"Radicato",score:norm};
+    if (a[3]===2&&a[4]===2&&a[0]===2&&a[5]===2) return {persona:"Radicato",score:norm};
+    if (countC>=12) return {persona:"Radicato",score:norm};
+    return {persona:"Mobile Condizionato",score:norm};
+  }
+}
+
+var SHEET_URL = "https://script.google.com/macros/s/AKfycbywI-Nwxx3o4-ikHbse_K8234TjoI6N9IvsyCligVRbHPHN39DiwE6IEmapKfwRUSOe/exec";
+function sendToSheet(entry) {
+  try { fetch(SHEET_URL, {method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(entry)}); } catch(e) {}
+}
+
+var state = {phase:"welcome",role:null,nome:"",cognome:"",codice_dip:"",codice_neg:"",brand:"",currentQ:0,answers:[],result:null};
+function setState(patch) { for(var k in patch) state[k]=patch[k]; render(); }
+function resetState() { return {phase:"welcome",role:null,nome:"",cognome:"",codice_dip:"",codice_neg:"",brand:"",currentQ:0,answers:[],result:null}; }
+
+function h(tag, attrs) {
+  var el = document.createElement(tag);
+  if (attrs) { for (var k in attrs) {
+    var v = attrs[k];
+    if (k==="style"&&typeof v==="object") { for(var s in v) el.style[s]=v[s]; }
+    else if (k.indexOf("on")===0) el.addEventListener(k.slice(2).toLowerCase(),v);
+    else if (k==="className") el.className=v;
+    else if (k==="disabled") { if(v) el.setAttribute("disabled",""); }
+    else if (k==="value") el.value=v;
+    else if (k==="selected") { if(v) el.selected=true; }
+    else el.setAttribute(k,v);
+  }}
+  for (var i=2;i<arguments.length;i++) {
+    var c = arguments[i];
+    if (c==null||c===false) continue;
+    if (typeof c==="string") el.appendChild(document.createTextNode(c));
+    else if (Array.isArray(c)) { for(var j=0;j<c.length;j++) if(c[j]) el.appendChild(typeof c[j]==="string"?document.createTextNode(c[j]):c[j]); }
+    else el.appendChild(c);
+  }
+  return el;
+}
+
+function render() {
+  var app = document.getElementById("app");
+  app.innerHTML = "";
+  var s = state;
+  var questions = s.role==="venditore" ? VENDITORE_QS : MANAGER_QS;
+  var allAnswered = s.answers.length>0;
+  for(var i=0;i<s.answers.length;i++) if(s.answers[i]===null) { allAnswered=false; break; }
+
+  app.appendChild(h("div",{className:"topbar"},
+    h("div",{className:"topbar-brand"},h("div",{className:"topbar-dot"}),h("span",{className:"topbar-title"},"Personas Mobilit\u00e0"),h("span",{className:"topbar-sub"},"Inditex Italia")),
+    h("div",{style:{display:"flex",gap:"8px"}},
+      s.phase!=="welcome" ? h("button",{className:"btn-sm",onClick:function(){setState(resetState());}},"Ricomincia") : null)
+  ));
+
+  var container = h("div",{className:"container"});
+
+  if (s.phase==="welcome") {
+    var cards = [];
+    var roles = [["venditore","\uD83D\uDECD","Sales Assistant","~7 min \u00b7 14 domande"],["manager","\uD83D\uDCCA","Manager","~8 min \u00b7 16 domande"]];
+    for(var i=0;i<roles.length;i++) { (function(r,em,label,sub){
+      cards.push(h("div",{className:"role-card",onClick:function(){ var qs=r==="venditore"?VENDITORE_QS:MANAGER_QS; var a=[]; for(var j=0;j<qs.length;j++) a.push(null); setState({role:r,phase:"info",answers:a}); }},
+        h("div",{className:"role-card-emoji"},em),h("div",{className:"role-card-label"},label),h("div",{className:"role-card-sub"},sub)));
+    })(roles[i][0],roles[i][1],roles[i][2],roles[i][3]); }
+    container.appendChild(h("div",{className:"fade-in",style:{textAlign:"center"}},
+      h("div",{className:"welcome-icon"},"\uD83E\uDDED"),
+      h("h1",{className:"welcome-title"},"Scopri il tuo profilo di mobilit\u00e0 interna"),
+      h("p",{className:"welcome-desc"},"Un breve test per capire come vivi le opportunit\u00e0 di crescita e mobilit\u00e0 in Inditex. Non ci sono risposte giuste o sbagliate."),
+      h("p",{className:"role-label"},"Qual \u00e8 il tuo ruolo?"),
+      h("div",{className:"role-cards"},cards)));
+  }
+
+  if (s.phase==="info") {
+    var info = h("div",{className:"fade-in"},
+      h("div",{style:{marginBottom:"24px"}},h("span",{className:s.role==="manager"?"badge badge-manager":"badge badge-venditore"},s.role==="manager"?"\uD83D\uDCCA Manager":"\uD83D\uDECD Sales Assistant")),
+      h("h2",{className:"section-title"},"Prima di iniziare"),
+      h("p",{className:"section-desc"},"Questi dati servono solo per associare il tuo profilo. Sono riservati."));
+    var startBtn;
+    function updateStartBtn(){
+      if(!startBtn) return;
+      var ok=state.nome.trim()&&state.cognome.trim()&&state.codice_dip.trim()&&state.codice_neg.trim()&&state.brand.trim();
+      startBtn.disabled=!ok; startBtn.style.background=ok?"var(--teal)":"var(--border)"; startBtn.style.cursor=ok?"pointer":"not-allowed";
+    }
+    function makeInput(label,key,placeholder){
+      var div=h("div"); div.appendChild(h("label",{className:"form-label"},label));
+      var inp=h("input",{className:"form-input",value:s[key],placeholder:placeholder});
+      inp.addEventListener("input",function(e){state[key]=e.target.value;updateStartBtn();});
+      div.appendChild(inp); return div;
+    }
+    info.appendChild(h("div",{className:"form-grid"},makeInput("Nome","nome","Mario"),makeInput("Cognome","cognome","Rossi")));
+    info.appendChild(h("div",{className:"form-grid"},makeInput("Codice Dipendente","codice_dip","es. 110820"),makeInput("Codice Negozio","codice_neg","es. 7960")));
+    var grid3=h("div",{className:"form-grid",style:{marginBottom:"24px"}});
+    var brandDiv=h("div"); brandDiv.appendChild(h("label",{className:"form-label"},"Brand"));
+    var sel=h("select",{className:"form-select",value:s.brand});
+    sel.appendChild(h("option",{value:""},"Seleziona..."));
+    for(var i=0;i<BRANDS.length;i++){var o=h("option",{value:BRANDS[i]},BRANDS[i]);if(s.brand===BRANDS[i])o.selected=true;sel.appendChild(o);}
+    sel.addEventListener("change",function(e){state.brand=e.target.value;updateStartBtn();});
+    brandDiv.appendChild(sel);grid3.appendChild(brandDiv);info.appendChild(grid3);
+    var canStart=s.nome.trim()&&s.cognome.trim()&&s.codice_dip.trim()&&s.codice_neg.trim()&&s.brand.trim();
+    startBtn=h("button",{className:"btn-primary",disabled:!canStart,onClick:function(){setState({phase:"test",currentQ:0});}},"Inizia il test \u2192");
+    info.appendChild(startBtn);container.appendChild(info);
+  }
+
+  if (s.phase==="test") {
+    var q=questions[s.currentQ],pct=Math.round(((s.currentQ+1)/questions.length)*100),letters=["A","B","C"];
+    var test=h("div",{className:"fade-in"},
+      h("div",{className:"progress-wrap"},h("span",{className:"progress-text"},"Domanda "+(s.currentQ+1)+" di "+questions.length),h("span",{className:"progress-pct"},pct+"%")),
+      h("div",{className:"progress-bar"},h("div",{className:"progress-fill",style:{width:pct+"%"}})));
+    var card=h("div",{className:"q-card"},
+      h("div",{className:"q-meta"},h("span",{className:"q-badge"},q.label),h("span",{className:"q-id"},q.id)),
+      h("p",{className:"q-text"},"\u201C"+q.q+"\u201D"));
+    var opts=h("div",{className:"q-options"});
+    for(var i=0;i<q.a.length;i++){(function(idx){
+      var isSel=s.answers[s.currentQ]===idx;
+      opts.appendChild(h("div",{className:"q-option"+(isSel?" selected":""),onClick:function(){
+        var newA=s.answers.slice();newA[state.currentQ]=idx;state.answers=newA;render();
+      }},h("span",{className:"q-letter"},letters[idx]),h("span",{className:"q-option-text"},q.a[idx])));
+    })(i);}
+    card.appendChild(opts);test.appendChild(card);
+    var nav=h("div",{className:"nav-row"},h("button",{className:"btn-nav btn-back",disabled:s.currentQ===0,onClick:function(){setState({currentQ:s.currentQ-1});}},"\u2190 Indietro"));
+    if(s.currentQ<questions.length-1){
+      nav.appendChild(h("button",{className:"btn-nav btn-next",disabled:s.answers[s.currentQ]===null,onClick:function(){setState({currentQ:s.currentQ+1});}},"Avanti \u2192"));
+    } else {
+      nav.appendChild(h("button",{className:"btn-nav btn-submit",disabled:!allAnswered,onClick:function(){
+        var res=classify(state.role,state.answers);var ltrs=["A","B","C"];
+        var at=[];for(var i=0;i<state.answers.length;i++)at.push(questions[i].id+"="+ltrs[state.answers[i]]);
+        var entry={timestamp:new Date().toISOString(),nome:state.nome,cognome:state.cognome,codice_dip:state.codice_dip,codice_neg:state.codice_neg,brand:state.brand,role:state.role,persona:res.persona,score:res.score,answersText:at.join(", ")};
+        sendToSheet(entry);
+        setState({result:res,phase:"result"});
+      }},"Scopri il tuo profilo \u2726"));
+    }
+    test.appendChild(nav);container.appendChild(test);
+  }
+
+  if(s.phase==="result"&&s.result){
+    var pd=PERSONAS[s.result.persona];
+    container.appendChild(h("div",{className:"slide-up",style:{textAlign:"center"}},
+      h("div",{className:"result-icon",style:{background:pd.color+"15",border:"3px solid "+pd.color}},pd.emoji),
+      h("p",{className:"result-label"},"Il tuo profilo \u00e8"),
+      h("h2",{className:"result-name",style:{color:pd.color}},s.result.persona),
+      h("p",{className:"result-tagline"},"\u201C"+pd.tagline+"\u201D"),
+      h("div",{className:"result-desc"},pd.desc),
+      h("div",{className:"result-stats"},
+        h("div",{className:"result-stat"},h("div",{className:"result-stat-val",style:{color:pd.color}},String(s.result.score)),h("div",{className:"result-stat-label"},"Indice mobilit\u00e0")),
+        h("div",{className:"result-stat"},h("div",{className:"result-stat-val",style:{color:"var(--navy)"}},String(questions.length)),h("div",{className:"result-stat-label"},"Domande"))),
+      h("button",{className:"btn-reset",onClick:function(){setState(resetState());}},"Nuovo test"),
+      h("p",{className:"result-note"},"Grazie per aver completato il test!")));
+  }
+
+  app.appendChild(container);
+  app.appendChild(h("div",{className:"footer"},"People & Culture \u00b7 Inditex Italia \u00b7 2026"));
+}
+render();
+</script>
+</body>
+</html>
